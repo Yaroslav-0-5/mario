@@ -15,8 +15,8 @@ int main(){
         exit(0);
     }
     SDL_Window* window =  SDL_CreateWindow("Mario",
-                                   200,
-                                   200,
+                                   0,
+                                   0,
                                    LARGEUR_FENETRE,
                                    HAUTEUR_FENETRE,
                                    SDL_WINDOW_SHOWN);

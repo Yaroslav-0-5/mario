@@ -19,8 +19,10 @@ void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer)
     mario->image[4] = loadImage("img/Mario5.png", renderer );
     mario->image[5] = loadImage("img/Mario6.png", renderer );
     //Position
-    mario->position.x = 0;
-    mario->position.y = 0;
+    mario->position.x = 100;
+    mario->position.y = 800;
+    mario->position.w = WIDTH_MARIO;
+    mario->position.h = HEIGHT_MARIO;
     //Compteurs
     mario->jump = 0;
     mario->jumptime = 0;
@@ -42,18 +44,44 @@ void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer)
 }
 
 void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer) {
-    mario->position.x = LARGEUR_FENETRE/12;
-    mario->position.y = 3*(HAUTEUR_FENETRE/4);
-    //SDL_Rect mr = {30, 30, 30, 30};
-    SDL_Rect mrdim = {mario->position.x, mario->position.y, WIDTH_MARIO, HEIGHT_MARIO};
-    SDL_RenderCopy(renderer, mario->image[0], NULL, &mrdim);
-   
+    if(mario->direction == 0){
+        if(mario->dernieredirection==1){
+            SDL_RenderCopy(renderer, mario->image[0], NULL,&mario->position);
+        }
+        if(mario->dernieredirection==2){
+            SDL_RenderCopy(renderer, mario->image[3], NULL,&mario->position);
+        }
+
+    }
+    if(mario->direction == 1){
+        SDL_RenderCopy(renderer, mario->image[chooseSpriteMovement(mario,0,1)], NULL,&mario->position);
+    }   
+    if(mario->direction == 2){
+        SDL_RenderCopy(renderer, mario->image[chooseSpriteMovement(mario, 3,4)], NULL,&mario->position);
+    }  
+    if(mario->jump == 1){
+        if(mario->direction == 1){
+        SDL_RenderCopy(renderer, mario->image[2], NULL,&mario->position);
+        }   
+        if(mario->direction == 2){
+            SDL_RenderCopy(renderer, mario->image[5], NULL,&mario->position);
+        }  /*Mettre les images, jump time ce regle dans event.c*/
+    }
 }
 
 
 //retourne soit numéro1 soit numéro2 pour alterner entre 2 sprite sur un mouvement.
 int chooseSpriteMovement(Personnage* mario, int numero1, int numero2) {
-    
+    (mario->temp)++;
+    if (mario->temp>60){
+        mario->temp = 0;
+    }
+    if(mario->temp<30){
+        return numero2;
+    } else{
+        
+        return numero1;
+    }  
 }
 
 void freePersonnage(Personnage* mario/*, Personnage **goomba, int nbGoomba*/) {
