@@ -60,6 +60,14 @@ void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *r
         SDL_RenderCopy(renderer, mario->image[chooseSpriteMovement(mario, 3,4)], NULL,&mario->position);
     }  
     if(mario->jump == 1){
+        if(mario->direction == 0){
+        if(mario->dernieredirection==1){
+            SDL_RenderCopy(renderer, mario->image[2], NULL,&mario->position);
+        }
+        if(mario->dernieredirection==2){
+            SDL_RenderCopy(renderer, mario->image[5], NULL,&mario->position);
+        }
+    }
         if(mario->direction == 1){
         SDL_RenderCopy(renderer, mario->image[2], NULL,&mario->position);
         }   
@@ -73,10 +81,10 @@ void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *r
 //retourne soit numéro1 soit numéro2 pour alterner entre 2 sprite sur un mouvement.
 int chooseSpriteMovement(Personnage* mario, int numero1, int numero2) {
     (mario->temp)++;
-    if (mario->temp>60){
+    if (mario->temp>120){
         mario->temp = 0;
     }
-    if(mario->temp<30){
+    if(mario->temp<60){
         return numero2;
     } else{
         

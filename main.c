@@ -22,6 +22,7 @@ int main(){
                                    SDL_WINDOW_SHOWN);
    SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
    SDL_Texture * textureMenu = loadImage("img/menu.jpg", renderer );
+   SDL_Texture * credit = loadImage("img/credits.png", renderer );
    SDL_Rect src1 = {0 , 0 , 40 , 40};
    SDL_Rect dst1 = { 0 , 0 , 40 , 40 };
    SDL_RenderClear ( renderer );
@@ -42,9 +43,13 @@ while ( continuer ){
         case SDL_KEYDOWN : // on a appuye sur une touche
         switch ( events . key . keysym . sym ) // liste des touches a p p u y
         {
+        case SDLK_2 :
+        SDL_RenderCopy ( renderer , credit , NULL , NULL );
+        break;
         case SDLK_1 :
         // on a appuye sur la touche 1
         jouer(renderer);
+        break;
         }
         break ;
         case SDL_KEYUP :
@@ -52,6 +57,9 @@ while ( continuer ){
         {
         case SDLK_1 :
         // on a relache la touche 1
+        case SDLK_2 :
+        SDL_RenderCopy ( renderer , credit , NULL , NULL );
+        break;
         }
             break ;
             }

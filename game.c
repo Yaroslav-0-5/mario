@@ -53,12 +53,6 @@ int jouer(SDL_Renderer* renderer) {
                 mario.dernieredirection = 2;
                 mario.direction = 0;
                 break;
-            case SDLK_UP:
-                mario.jump = 0;
-                while(mario.jumptime != 0){
-
-                }
-                break;
             }
             break ;
             }

@@ -19,12 +19,12 @@ void deplacement(Map* map, Personnage* mario, Sprites* imageDecors, Personnage**
             mario->position.x--;
     }
     if(mario->jump == 1){
-        if(mario->jumptime<70){
+        if(mario->jumptime<140){
             mario->jumptime++;
             int posav = mario->position.y;
-            mario->position.y++;
+            mario->position.y--;
         }
-        if(mario->jumptime==70){
+        if(mario->jumptime==140){
             mario->jump = 2;
         }
     }
@@ -32,7 +32,7 @@ void deplacement(Map* map, Personnage* mario, Sprites* imageDecors, Personnage**
         if(mario->jumptime!=0){
             mario->jumptime--;;
             int posav = mario->position.y;
-            mario->position.y--;
+            mario->position.y++;
         }
         if(mario->jumptime==0){
             mario->jump = 0;

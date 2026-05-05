@@ -39,6 +39,14 @@ SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer) //NE PAS MODIF
 
 Sprites* chargerImages(SDL_Renderer *renderer) {
     Sprites* sprites;
+    /*int goomba[] = malloc(3 * sizeof(SDL_Texture *));
+    if (goomba == NULL) {
+        printf("Erreur malloc\n");
+        exit(EXIT_FAILURE);
+    }
+    goomba[0] = loadImage("img/goomba1.png", renderer );
+    goomba[1] = loadImage("img/goomba.png", renderer );
+    goomba[2] = loadImage("img/goomba.png", renderer );*/
     
 	
     return sprites;
