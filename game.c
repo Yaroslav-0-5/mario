@@ -6,9 +6,11 @@
 
 int jouer(SDL_Renderer* renderer) {
     Personnage mario;
+    Personnage mob;
     Map map;
 
     chargerMario(&mario, &map, renderer);
+    chargerMob(&mob,&map,renderer);
 	//charger image et personnage. 
 
     
@@ -31,13 +33,15 @@ int jouer(SDL_Renderer* renderer) {
             {
             case SDLK_RIGHT:
                 mario.direction = 1;
-
                 break;
 
             case SDLK_LEFT:
                 mario.direction = 2;
                 break;
             case SDLK_UP:
+                if(mario.jump == 2){
+                    break;
+                }
                 mario.jump = 1;
                 break;
             }            
@@ -64,8 +68,9 @@ int jouer(SDL_Renderer* renderer) {
         
 		//on gère les divers events.
         
-        deplacement(&map,&mario,0,0,0);
+        deplacement(&map,&mario,0,&mob,0);
 		afficherPerso(&mario, 0, 0, renderer);
+        afficherMob(&mob,0,0,renderer);
         SDL_RenderPresent(renderer); // affiche le tout
         
         

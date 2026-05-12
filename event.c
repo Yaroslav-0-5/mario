@@ -6,7 +6,7 @@ void mapScroll(Map* map, Personnage* mario)
 }
 
 
-void deplacement(Map* map, Personnage* mario, Sprites* imageDecors, Personnage** goombas, int nbGoomba) {
+void deplacement(Map* map, Personnage* mario, Sprites* imageDecors, Personnage* mob, int nbGoomba) {
     //on effectue les modifications dans un carré temporaire, si il n'y a pas de collision, on change la position de Mario.
     if(mario->direction == 1){
 
@@ -38,10 +38,24 @@ void deplacement(Map* map, Personnage* mario, Sprites* imageDecors, Personnage**
             mario->jump = 0;
         }
     }
+    if(mob->direction == 0){
+        mob->temp++;
+        
+        if(mob->temp < 100){
+            mob->position.x--;
+            mob->direction = 1;
+        if(mob->direction == 1){
+                if(mob->temp>200){
+                    mob->temp = 0;
+                    mob->direction = 0;
+                }
+                mob->position.x++;
+                
+            }
+        }
 
-
+    }
 }
-
 
 /* Regarde si le personnage sort du décors, renvoie 1 si il sort à droite/gauche/haut, 
 -1 si il sort en bas (condition de défaite) et 0 sinon

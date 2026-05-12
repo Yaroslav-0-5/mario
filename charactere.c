@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "charactere.h"
 
 
@@ -42,6 +41,41 @@ void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer)
     toutes les images de mario en mm temps, et enfin en fonction des touches appuyées/position de mario changer 
     son image*/
 }
+void chargerMob(Personnage* mob, Map* map, SDL_Renderer *renderer)
+{
+    //Images
+    mob->image = malloc(NUMBER_IMAGE_MOB * sizeof(SDL_Texture *));
+    if (mob->image == NULL) {
+        printf("Erreur malloc\n");
+        exit(EXIT_FAILURE);
+    }
+    mob->image[0] = loadImage("img/goomba1.png", renderer );
+    mob->image[1] = loadImage("img/goomba2.png", renderer );
+    mob->image[2] = loadImage("img/goomba3.png", renderer );
+    //Position
+    mob->position.x = 600;
+    mob->position.y = 800;
+    mob->position.w = WIDTH_MARIO;
+    mob->position.h = HEIGHT_MARIO;
+    //Compteurs
+    mob->jump = 0;
+    mob->jumptime = 0;
+    mob->gravite = 0;
+    mob->direction = 0;
+    mob->dernieredirection = 1;
+    mob->temp = 0;
+    mob->win = 0;
+    mob->invisible = 0;
+    mob->lvl = 1;
+    mob->lvlperdu = 0;
+
+
+    
+    /*chargerMario : consiste à initialiser Mario(voir charactère.h), il faudra définir
+    la valeur jump, jump time, etc..., ainsi que créer un malloc de pointeur pour pouvoir charger
+    toutes les images de mario en mm temps, et enfin en fonction des touches appuyées/position de mario changer 
+    son image*/
+}
 
 void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer) {
     if(mario->direction == 0){
@@ -75,6 +109,9 @@ void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *r
             SDL_RenderCopy(renderer, mario->image[5], NULL,&mario->position);
         }  /*Mettre les images, jump time ce regle dans event.c*/
     }
+}
+void afficherMob(Personnage* mob, int xscroll, int yscroll , SDL_Renderer *renderer){
+    SDL_RenderCopy(renderer, mob->image[chooseSpriteMovement(mob,0,1)], NULL,&mob->position);
 }
 
 
