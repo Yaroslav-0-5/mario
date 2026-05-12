@@ -10,7 +10,9 @@ int jouer(SDL_Renderer* renderer) {
 
     chargerMario(&mario, &map, renderer);
 	//charger image et personnage. 
-
+    Map* map2 = ChargerMap("level/niveau0.lvl"); //charge la map dans le jeu
+    Sprites* sprites = chargerImages(renderer); //charge les images dans le jeu
+    
     
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //on met le fond en blanc
     int continuer = 1;
@@ -31,8 +33,8 @@ int jouer(SDL_Renderer* renderer) {
         
 		//on gère les divers events.
 		afficherPerso(&mario, 0, 0, renderer);
+        afficherMap(map2, sprites, renderer); //affiche la map
         SDL_RenderPresent(renderer); // affiche le tout
-        
         
     }
 	//a vous de compléter, au fur et à mesure, les deux fonctions en dessous pour bien faire le nettoyage. 

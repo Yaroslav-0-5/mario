@@ -39,7 +39,27 @@ SDL_Texture *loadImage(const char path[], SDL_Renderer *renderer) //NE PAS MODIF
 
 Sprites* chargerImages(SDL_Renderer *renderer) {
     Sprites* sprites;
-    
+    sprites = malloc(NbSprites * sizeof(Sprites));
+    sprites[0].sprite = loadImage("img/sky.png", renderer);
+    sprites[0].traverser = 0;
+    sprites[1].sprite = loadImage("img/sol.png", renderer);
+    sprites[1].traverser = 1;
+    sprites[2].sprite = loadImage("img/block.png", renderer); 
+    sprites[2].traverser = 1;
+    sprites[3].sprite = loadImage("img/boite.png", renderer);
+    sprites[3].traverser = 1;
+    sprites[4].sprite = loadImage("img/tuyau1.png", renderer);
+    sprites[4].traverser = 1;
+    sprites[5].sprite = loadImage("img/tuyau2.png", renderer);
+    sprites[5].traverser = 1;
+    sprites[6].sprite = loadImage("img/tuyau3.png", renderer);
+    sprites[6].traverser = 1;
+    sprites[7].sprite = loadImage("img/tuyau4.png", renderer);
+    sprites[7].traverser = 1;
+    sprites[8].sprite = loadImage("img/fin1.png", renderer);
+    sprites[8].traverser = 0;
+    sprites[9].sprite = loadImage("img/fin2.png", renderer);
+    sprites[9].traverser = 0;
 	
     return sprites;
 }
@@ -47,14 +67,51 @@ Sprites* chargerImages(SDL_Renderer *renderer) {
 Map* ChargerMap(char* level)
 {
     Map* map = malloc(sizeof(Map));
-	
+	FILE*fichier = fopen("level/niveau0.lvl", "r");
+    if(fichier == NULL){
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(EXIT_FAILURE);
+    }
+    char ligne[256];
+    int buffer1, buffer2;
 
-	return map;
+    // Ignorer la première ligne "niveau 0"
+    fgets(ligne, sizeof(ligne), fichier);
+
+    // Lire la deuxième ligne "30 30"
+    fscanf(fichier, "%d %d", &buffer1, &buffer2);
+
+    map -> width = buffer1;
+    map -> height = buffer2;
+
+    map -> LoadedMap = malloc(buffer2 * sizeof(int*));
+    for (int i = 0; i < buffer2; i++) {
+        map -> LoadedMap[i] = malloc(buffer1 * sizeof(int));
+    }
+
+    for(int i = 0; i < buffer2; i++) {
+        for(int j = 0; j < buffer1; j++) {
+            fscanf(fichier, "%d", &(map ->LoadedMap[i][j]));
+        }
+    }
+
+
+
+    fclose(fichier);
+    return map;
 }
 
-void afficherMap(Map* map, Sprites* sprites, SDL_Renderer *renderer) {
 
-    
+void afficherMap(Map* map, Sprites* sprites, SDL_Renderer *renderer) {
+    SDL_Rect src1 = {0, 0, 33, 33};
+    for(int i = 0; i < map -> height; i++) {
+        for(int j = 0; j < map -> width; j++) { 
+            SDL_RenderCopy ( renderer , sprites[map -> LoadedMap[i][j]].sprite , NULL , &src1 ); //affiche le ciel
+            src1.x = src1.x + 33 ; //on décale la position de src1 pour faire le déplacement de la map
+            }
+            src1.x = 0 ; //on remet la position de src1 à 0 pour faire le déplacement de la map
+            src1.y = src1.y + 33 ;
+        }
 }
 
 void LibererMap(Map* map, Sprites* sprites)
