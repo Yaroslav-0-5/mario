@@ -18,8 +18,8 @@ void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer)
     mario->image[4] = loadImage("img/Mario5.png", renderer );
     mario->image[5] = loadImage("img/Mario6.png", renderer );
     //Position
-    mario->position.x = 100;
-    mario->position.y = 800;
+    mario->position.x = 0;
+    mario->position.y = 885;
     mario->position.w = WIDTH_MARIO;
     mario->position.h = HEIGHT_MARIO;
     //Compteurs
@@ -54,7 +54,7 @@ void chargerMob(Personnage* mob, Map* map, SDL_Renderer *renderer)
     mob->image[2] = loadImage("img/goomba3.png", renderer );
     //Position
     mob->position.x = 600;
-    mob->position.y = 800;
+    mob->position.y = 885;
     mob->position.w = WIDTH_MARIO;
     mob->position.h = HEIGHT_MARIO;
     //Compteurs
