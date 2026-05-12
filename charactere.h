@@ -13,6 +13,7 @@ Attention la map doit déjà être chargé avant de créer un charactère.
     #define WIDTH_MARIO 30 //largeur des images mario
     #define HEIGHT_MARIO 40 //hauteur des images mario
     #define NUMBER_IMAGE_MARIO 6 //nombre d'image de mario en tout
+    #define NUMBER_IMAGE_MOB 3
 
     typedef struct Personnage Personnage;
     struct Personnage
@@ -31,7 +32,9 @@ Attention la map doit déjà être chargé avant de créer un charactère.
     };
 
     void chargerMario(Personnage* mario, Map* map, SDL_Renderer *renderer);
+    void chargerMob(Personnage* mob, Map* map, SDL_Renderer *renderer);
     void afficherPerso(Personnage* mario, int xscroll, int yscroll , SDL_Renderer *renderer);
+    void afficherMob(Personnage* mob, int xscroll, int yscroll , SDL_Renderer *renderer);
     int chooseSpriteMovement(Personnage* mario, int numero1, int numero2);
     void freePersonnage(Personnage* mario/*, Personnage **goomba, int nbGoomba*/);
     
