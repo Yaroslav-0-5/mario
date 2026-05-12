@@ -69,14 +69,12 @@ int jouer(SDL_Renderer* renderer) {
         }
         
 		//on gère les divers events.
-        
+        afficherMap(map2, sprites, renderer); //affiche la map
         deplacement(&map,&mario,0,&mob,0);
 		afficherPerso(&mario, 0, 0, renderer);
-<<<<<<< HEAD
-        afficherMap(map2, sprites, renderer); //affiche la map
-=======
+
         afficherMob(&mob,0,0,renderer);
->>>>>>> eaead4570adccb9b0e38d3764d75f6f6b9eeae03
+
         SDL_RenderPresent(renderer); // affiche le tout
         
     }
