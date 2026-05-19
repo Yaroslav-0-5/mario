@@ -82,6 +82,6 @@ int jouer(SDL_Renderer* renderer) {
     //LibererMap(map, sprites);
     //freePersonnage(mario, goomba, nbGoomba);
     freePersonnage(&mario);
-
+    LibererMap(map2, sprites);
     return continuer;
 }
